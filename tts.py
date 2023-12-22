@@ -1,17 +1,32 @@
 import boto3
-
 polly = boto3.client('polly',
                      region_name = 'us-east-1',
-                     aws_access_key_id='',
-                     aws_secret_access_key='')
+                     aws_access_key_id='AKIAQZ6QLBAVT37FZ5PO',
+                     aws_secret_access_key='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')
 
 
 
-def createtts():
-    result = polly.synthesize_speech(Text='Hello World, This is a test Message. In this article we will see how we can add external audio to the video file clip in MoviePy. MoviePy is a Python module for video editing, which can be used for basic operations on videos and GIF’s.',
+
+
+def createtts(text: str, output:str):
+    new_text = text.replace("AITA", "Am I the A hole")
+
+    result = polly.synthesize_speech(Text=new_text,
                                     OutputFormat='mp3',
                                     VoiceId='Joanna')
 
     audio = result['AudioStream'].read()
-    with open("tts.mp3", 'wb') as file:
+
+    path = "Video_Info/" + output
+
+    with open(path, 'wb') as file:
         file.write(audio)
+
+
+def main():
+    createtts()
+
+if __name__ == '__main__':
+    main()
+
+
