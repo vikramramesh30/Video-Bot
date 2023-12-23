@@ -1,6 +1,5 @@
 from moviepy.editor import VideoFileClip, vfx, AudioFileClip, TextClip, CompositeVideoClip, ImageClip, concatenate_audioclips
-from moviepy.video.fx.all import crop
-import stt, random, tts, textwrap, redditpull
+import stt, random, tts, textwrap, redditpull, os
 
 
 
@@ -9,20 +8,16 @@ def createbackground():
     video = VideoFileClip("Video_Info/background.mp4")
 
     #create tts
-    tts.createtts("hello", "ttsintro.mp3")
-    tts.createtts("hello little brody", "ttsbody.mp3")
+    tts.createtts(redditpull.title, "ttsintro.mp3")
+    tts.createtts(redditpull.body, "ttsbody.mp3")
 
     audiointro = AudioFileClip("Video_Info/ttsintro.mp3")
     audiobody = AudioFileClip("Video_Info/ttsbody.mp3")
     finalaudio = concatenate_audioclips([audiointro, audiobody])
 
-
     videolength = int(finalaudio.duration) + 1
 
-    if videolength < 60:
-        videolength = 60
     
-
     randint = random.randint(0, int(video.duration)-videolength)
 
     randomizedclip = video.subclip(randint,randint+videolength).fx(vfx.colorx,1.2)
@@ -37,7 +32,9 @@ def createbackground():
 
     finalclip = CompositeVideoClip([resizedclip, createIntroImage(redditpull.title)])
 
-    CaptionGenerator(finalclip).write_videofile("Video_Info/final.mp4", codec="libx264")
+    captionedclip = CaptionGenerator(finalclip)
+    
+    captionedclip.write_videofile("Video_Info/final.mp4", codec="libx264")
 
 
 
@@ -60,7 +57,6 @@ def CaptionGenerator(videoclip):
 
 
    text_clips = []
-   shadow_clips = []
 
 
    words_list = stt.Transcriber("Video_Info/ttsbody.mp3")
@@ -99,6 +95,9 @@ def createIntroImage(intro: str):
 
 def main():
     createbackground()
+    #filepath = "/Users/vikramramesh/Documents/GitHub/Video-Bot/Video_Info/final.mp4"
+    #os.system("upload_video.py --file='" + filepath + "' --title='" + redditpull.title + "' --description ='#shorts' --privacyStatus='private' ")
+
 
 if __name__ == '__main__':
     main()

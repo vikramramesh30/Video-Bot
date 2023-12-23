@@ -2,3 +2,4 @@
 .vscode/
 __pycache__/
 Video_Info/
+.DS_Store
