@@ -10,6 +10,8 @@ polly = boto3.client('polly',
 
 def createtts(text: str, output:str):
     new_text = text.replace("AITA", "Am I the A hole")
+    new_text = text.replace("IATA", "I am the A hole")
+
 
     result = polly.synthesize_speech(Text=new_text,
                                     OutputFormat='mp3',

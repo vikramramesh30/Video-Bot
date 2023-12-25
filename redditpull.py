@@ -28,3 +28,6 @@ for post in res.json()['data']['children'][2:]:
     body = post['data']['selftext']
     break
 
+
+print(title)
+

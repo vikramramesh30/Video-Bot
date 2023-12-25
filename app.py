@@ -11,6 +11,9 @@ def createbackground():
     tts.createtts(redditpull.title, "ttsintro.mp3")
     tts.createtts(redditpull.body, "ttsbody.mp3")
 
+
+    print("Created tts audios.")
+
     audiointro = AudioFileClip("Video_Info/ttsintro.mp3")
     audiobody = AudioFileClip("Video_Info/ttsbody.mp3")
     finalaudio = concatenate_audioclips([audiointro, audiobody])
@@ -29,14 +32,16 @@ def createbackground():
     resizedclip = randomizedclip.resize(height=1920)
     resizedclip = resizedclip.crop(x_center=960, y_center=960, width=1080, height=1920)
 
+    print("Created background, adding intro image.")
 
     finalclip = CompositeVideoClip([resizedclip, createIntroImage(redditpull.title)])
+
+
+    print("Intro image added, adding captions and then will write to file.")
 
     captionedclip = CaptionGenerator(finalclip)
     
     captionedclip.write_videofile("Video_Info/final.mp4", codec="libx264")
-
-
 
     
     #resizedclip.write_videofile("final.mp4", codec='mpeg4', bitrate='3000k', audio_codec="aac")
@@ -94,9 +99,19 @@ def createIntroImage(intro: str):
     return finalclip
 
 def main():
-    createbackground()
-    #filepath = "/Users/vikramramesh/Documents/GitHub/Video-Bot/Video_Info/final.mp4"
-    #os.system("upload_video.py --file='" + filepath + "' --title='" + redditpull.title + "' --description ='#shorts' --privacyStatus='private' ")
+    #createbackground()
+    filepath = "/Users/vikramramesh/Documents/GitHub/Video-Bot/Video_Info/final.mp4"
+    description = "#shorts #askreddit #reddit #redditstories #minecraftparkour #minecraft #subreddit"
+    privacyStatus = "private"
+    keywords = "Shorts,Ask Reddit,Reddit,Reddit Stories,Minecraft Parkour,Minecraft,Sub Reddit"
+
+    print("Video made, uploading to youtube.")
+    os.system("python upload_video.py " + 
+              "--file='" + filepath + 
+              "' --title='" + redditpull.title + 
+              "' --description='" + description +
+              "' --keywords='" + keywords +
+              "' --privacyStatus='" + privacyStatus + "'")
 
 
 if __name__ == '__main__':
