@@ -26,7 +26,12 @@ body = ""
 for post in res.json()['data']['children'][2:]:
     title = post['data']['title']
     body = post['data']['selftext']
-    break
+
+    titleLength = len(title.split())
+    bodyLength = len(body.split())
+
+    if titleLength + bodyLength < 200:
+        break
 
 
 print(title)
