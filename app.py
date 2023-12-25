@@ -79,7 +79,7 @@ def createIntroImage(intro: str):
     audiobody = AudioFileClip("Video_Info/ttsintro.mp3")
 
     text_clips = []
-    wrapper = textwrap.TextWrapper(width=32) 
+    wrapper = textwrap.TextWrapper(width=31) 
     word_list = wrapper.wrap(text=intro) 
     count = 0
     for word in word_list[:-1]:
@@ -99,19 +99,19 @@ def createIntroImage(intro: str):
     return finalclip
 
 def main():
-    #createbackground()
-    filepath = "/Users/vikramramesh/Documents/GitHub/Video-Bot/Video_Info/final.mp4"
-    description = "#shorts #askreddit #reddit #redditstories #minecraftparkour #minecraft #subreddit"
-    privacyStatus = "private"
-    keywords = "Shorts,Ask Reddit,Reddit,Reddit Stories,Minecraft Parkour,Minecraft,Sub Reddit"
+    createbackground()
+    # filepath = "/Users/vikramramesh/Documents/GitHub/Video-Bot/Video_Info/final.mp4"
+    # description = "#shorts #askreddit #reddit #redditstories #minecraftparkour #minecraft #subreddit"
+    # privacyStatus = "private"
+    # keywords = "Shorts,Ask Reddit,Reddit,Reddit Stories,Minecraft Parkour,Minecraft,Sub Reddit"
 
-    print("Video made, uploading to youtube.")
-    os.system("python upload_video.py " + 
-              "--file='" + filepath + 
-              "' --title='" + redditpull.title + 
-              "' --description='" + description +
-              "' --keywords='" + keywords +
-              "' --privacyStatus='" + privacyStatus + "'")
+    # print("Video made, uploading to youtube.")
+    # os.system("python upload_video.py " + 
+    #           "--file='" + filepath + 
+    #           "' --title='" + redditpull.title + 
+    #           "' --description='" + description +
+    #           "' --keywords='" + keywords +
+    #           "' --privacyStatus='" + privacyStatus + "'")
 
 
 if __name__ == '__main__':
