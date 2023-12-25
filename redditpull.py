@@ -30,9 +30,8 @@ for post in res.json()['data']['children'][2:]:
     titleLength = len(title.split())
     bodyLength = len(body.split())
 
-    if titleLength + bodyLength < 200:
+    if titleLength + bodyLength < 210:
         break
-
 
 print(title)
 

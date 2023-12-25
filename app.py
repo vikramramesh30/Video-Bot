@@ -83,15 +83,15 @@ def createIntroImage(intro: str):
     word_list = wrapper.wrap(text=intro) 
     count = 0
     for word in word_list[:-1]:
-        text = TextClip(txt = word, fontsize = 42, color = 'black').set_position((30,190 + 50*count))
+        text = TextClip(txt = word, font="Obelix-Pro", fontsize = 42, color = 'black').set_position((30,190 + 50*count))
         text_clips.append(text)
         count+=1
-    text = TextClip(txt = word_list[-1], fontsize = 45, color = 'black').set_position((30,190 + 50*count))
+    text = TextClip(txt = word_list[-1], font="Obelix-Pro", fontsize = 42, color = 'black').set_position((30,190 + 50*count))
     text_clips.append(text)
 
     duration = audiobody.duration
 
-    text = TextClip(txt = intro, fontsize = 30, color = 'black').set_position((70,140))
+    text = TextClip(txt = intro, font="Obelix-Pro", fontsize = 42, color = 'black').set_position((70,140))
     image = ImageClip("Intro_Template.png")
     finalclip = CompositeVideoClip([image] + text_clips).set_start(0).set_duration(duration).set_position(('center', 'center'))
 
@@ -113,6 +113,7 @@ def main():
     #           "' --keywords='" + keywords +
     #           "' --privacyStatus='" + privacyStatus + "'")
 
+    # print("Uploading to tiktok")
 
 if __name__ == '__main__':
     main()
