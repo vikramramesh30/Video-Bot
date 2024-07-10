@@ -2,7 +2,7 @@ import boto3
 polly = boto3.client('polly',
                      region_name = 'us-east-1',
                      aws_access_key_id='AKIAQZ6QLBAVT37FZ5PO',
-                     aws_secret_access_key='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')
+                     aws_secret_access_key='') #hidden for security reasons
 
 
 
